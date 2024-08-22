@@ -166,54 +166,47 @@
     });
   }
 
+document.getElementById("new-pokemon-form").addEventListener("submit", createNewPokemon);
 
+// Add new pokemon.
+function createNewPokemon(event) {
+  event.preventDefault();   
 
-
-
-
-  // Add new pokemon.
-  const newPokemonForm = document.getElementById('new-pokemon-form');
-newPokemonForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevent default form submission
-  // Get form data
+  // Get pokemno data
   const name = document.getElementById('newname').value;
   const height = parseFloat(document.getElementById('newheight').value);
   const weight = parseFloat(document.getElementById('newweight').value);
-  // Validate input (you can add more validation as needed)
-  if (name.trim() === '' || types.length === 0 || isNaN(height) || isNaN(weight)) {
-    alert("Please fill in all fields correctly.");
-    return;
-  }
+  
+  // New Pokemon object
+  const newPokemon = {
+    name: name,
+    height: height,
+    weight: weight
+  };
 
-  // Send new pokemno data to local db.json.
+  // Send new Pokemon data to your API or backend (replace with your actual API call)
   fetch('http://localhost:3000/newpokemon', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      name: name,
-      height: height,
-      weight: weight
-    })
+    body: JSON.stringify(newPokemon)
   })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Network response was not ok');
-    }
-  })
-  .then(data => {
-    // Update the Pokemon list (assuming your API returns the new Pokemon data)
-    pokemonList.push(data); 
-    displayPokemons(pokemonList);
-    // Clear the form
-    newPokemonForm.reset();
-    alert("Pokemon added successfully!");
-  })
+  .then((response) => response.json())
+  .then(updatePokemonList) 
   .catch(error => {
     console.error('Error adding Pokemon:', error);
-    alert('Error adding Pokemon. Please try again.');
+    alert('Error Please try again.');
   });
-});
+
+  document.getElementById("new-pokemon-form").reset();
+}
+
+// Function to update pokemon list
+function updatePokemonList(data) { 
+  // Add the new Pokemon to the list
+  pokemonList.push(data); 
+  displayPokemons(pokemonList);
+  // Refresh the form
+  document.getElementById("new-pokemon-form").reset();
+}

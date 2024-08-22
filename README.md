@@ -7,16 +7,14 @@
 ## Core Deliverables
 
 As a user, I can
-- Search for specific Pokemon across the generations ('submit' eventListener)
-- Filter Pokemon by categories
-- Sort Pokemon on page by attributes
+
+- Sort Pokemon by number or name.
 - Select a Pokemon to view details on them ('click' eventListener)
-- Card increases in scale on mouse over ('mouseOver' eventListener)
+- Card increases in scale on mouse over ('click' eventListener)
 - User can create a team of 6 pokemon
   * Click on a pokemon, adding it to the battle roster, POST
   * The battle roster will be viewed when the "Team" button is clicked, GET
-  * User can replace a pokemon from the roster with a new one, PATCH
-  * User can delete a pokemon from the team, DELETE
+  
 
 ## Wireframe
 
@@ -37,11 +35,5 @@ Posible wireframes:
 ## References
 <<<<<<< HEAD
 
-https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
-=======
+https://pokeapi.co/api/v2/pokemon
 
-https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
-
-
-
->>>>>>> dd34ef34f1b6d646beee265040761b102eb70968

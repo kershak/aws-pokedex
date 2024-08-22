@@ -288,6 +288,10 @@ body {
 .new-pokemon-form {
   color: black;
   border-radius: 50px;
+  text-align: justify;
+  position:relative ;
+  margin-right: auto;
+  margin-left: 2%;
 }
 
 

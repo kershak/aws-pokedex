@@ -1,12 +1,16 @@
 {
-    "newpokemon": [
+    "pokemon": [
         {
-        "id": 1,
-        "name": "alex",
-        "url": "http://newpokemon",
-        "height": "24",
-        "weight": "24"
-
+             "id": "1",
+            "name": "pokachu",
+             "height": "24",
+             "weight": "24"
+        },
+        {
+            "id": "2",
+            "name": "borachu",
+            "height":  "12",
+            "weight": "2"
         }
     ]
-}
+}   
