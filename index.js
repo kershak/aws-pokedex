@@ -1,123 +1,137 @@
-// index.js
-const API = "http://localhost:3000/ramens"
 
-  fetch(API)
-  .then((res) => res.json())
-  .then(renderRamens)
-  .catch(error => console.log(error));
+const MAX_POKEMON = 100     ;
+const listWrapper = document.querySelector(".list-wrapper");
+const searchInput = document.querySelector("#search-input");
+const numberFilter = document.querySelector("#number");
+const nameFilter = document.querySelector("#name");
+const notFoundMessage = document.querySelector("#not-found-message");
 
-function renderRamens(ramens) {
-  //console.log(ramens);
-  ramens.forEach(renderRamen)
+let allPokemons = [];
+
+fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
+  .then((response) => response.json())
+  .then((data) => {
+    allPokemons = data.results;
+    displayPokemons(allPokemons);
+  });
+
+async function fetchPokemonDataBeforeRedirect(id) {
+  try {
+    const [pokemon, pokemonSpecies] = await Promise.all([
+      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
+        res.json()
+      ),
+      fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) =>
+        res.json()
+      ),
+    ]);
+    return true;
+  } catch (error) {
+    console.error("Failed to fetch Pokemon data before redirect");
+  } 
 }
 
-function renderRamen(ramen) {
-  const ramenMenuDiv = document.getElementById("ramen-menu");
-  //console.log (ramenMenuDiv)
-  const ramenImage = document.createElement('img')
-  ramenImage.src = ramen.image;
-  ramenMenuDiv.append(ramenImage);
+function displayPokemons(pokemon) {
+  listWrapper.innerHTML = "";
 
-  ramenImage.addEventListener("click", (event) => handleClick(ramen))
-}
+  pokemon.forEach((pokemon) => {
+    const pokemonID = pokemon.url.split("/")[6];
+    const listItem = document.createElement("div");
+    listItem.className = "list-item";
+    listItem.innerHTML = `
+        <div class="number-wrap">
+            <p class="caption-fonts">#${pokemonID}</p>
+        </div>
+        <div class="img-wrap">
+            <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" alt="${pokemon.name}" />
+        </div>
+        <div class="name-wrap">
+            <p class="body3-fonts">#${pokemon.name}</p>
+        </div>
+    `;
 
-function renderDetails(ramen) {
-  //console.log(ramen.image)
-  //const ramenDetailDiv = document.getElementsByClassName('ramen-detail');
-  const detailImage = document.getElementById("detail-image");
-  const ramenName = document.getElementById('ramen-name');
-  const restaurantName = document.getElementById('restaurant');
-  const ratingDisplay = document.getElementById("rating-display");
-  const commentDisplay = document.getElementById("comment-display");
-
-  //ramenDetailDiv.src = ramen
-  detailImage.src = ramen.image;
-  detailImage.alt = ramen.name;
-  ramenName.textConftent = ramen.name;
-  restaurantName.textContent = ramen.restaurant; 
-  ratingDisplay.textContent = ramen.rating;
-  commentDisplay.textContent = ramen.comment;
-
-}
-
-document.getElementById("new-ramen").addEventListener("submit",createNewRamen);
-function createNewRamen(event){
-  event.preventDefault();
-  //console.log(event.target.name.value)
-
-  const newRamenObj = {
-    name : event.target.name.value,
-    restaurant: event.target.restaurant.value,
-    image: event.target.image.value,
-    rating: event.target.rating.value,
-    comment: event.target["new-comment"].value,
-  };
-  //console.log(newRamenObj);
-  
-
-  //e.target.clear();
-
-
-  fetch(API, {
-    method : 'POST',
-    headers : {
-      'Content-Type': 'application/json'
-
-    },
-    body:JSON.stringify(newRamenObj)
-  })
-  .then(res => res.json())
-  .then(updateRamenList);
-
-  document.getElementById("new-ramen").reset();
-}
-
-function updateRamenList() {
-  fetch(API)
-    .then((res) => res.json())
-    .then((updatedRamens) => {
-      // Clear the existing ramen images
-      const ramenMenuDiv = document.getElementById("ramen-menu");
-      ramenMenuDiv.innerHTML = ''; 
-      // Re-render the ramen images with the updated data
-      updatedRamens.forEach(renderRamen);
+    listItem.addEventListener("click", async () => {
+      const success = await fetchPokemonDataBeforeRedirect(pokemonID);
+      if (success) {
+        window.location.href = `./pokemondetails.html?id=${pokemonID}`;
+      }
     });
+
+    listWrapper.appendChild(listItem);
+  });
 }
-      
 
-// Callbacks
-const handleClick = (ramen) => {
-  // Add code
-  renderDetails(ramen);
-};
+searchInput.addEventListener("keyup", handleSearch);
 
-const addSubmitListener = () => {
-  // Add code
-  const newRamenForm = document.getElementById("new-ramen");
-  newRamenForm.addEventListener("submit", createNewRamen);
-};
+function handleSearch() {
+  const searchTerm = searchInput.value.toLowerCase();
+  let filteredPokemons;
 
-const displayRamens = () => {
-  // Add code
-  fetch (API)
-    .then((res) => res.json())
-    .then(renderRamens);
-};
+  if (numberFilter.checked) {
+    filteredPokemons = allPokemons.filter((pokemon) => {
+      const pokemonID = pokemon.url.split("/")[6];
+      return pokemonID.startsWith(searchTerm);
+    });
+  } else if (nameFilter.checked) {
+    filteredPokemons = allPokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().startsWith(searchTerm)
+    );
+  } else {
+    filteredPokemons = allPokemons;
+  }
 
-const main = () => {
-  // Invoke displayRamens here  
-  displayRamens();
-  // Invoke addSubmitListener here
-  addSubmitListener();
-};
+  displayPokemons(filteredPokemons);
 
-main()
+  if (filteredPokemons.length === 0) {
+    notFoundMessage.style.display = "block";
+  } else {
+    notFoundMessage.style.display = "none";
+  }
+}
 
+const closeButton = document.querySelector(".search-close-icon");
+closeButton.addEventListener("click", clearSearch);
 
-// Export functions for testing
-export {
-  displayRamens,
-  addSubmitListener,
-  handleClick,
-  main,
-};
+function clearSearch() {
+  searchInput.value = "";
+  displayPokemons(allPokemons);
+  notFoundMessage.style.display = "none";
+}
+
+const inputElement = document.querySelector("#search-input");
+const search_icon = document.querySelector("#search-close-icon");
+const sort_wrapper = document.querySelector(".sort-wrapper");
+
+inputElement.addEventListener("input", () => {
+  handleInputChange(inputElement);
+});
+search_icon.addEventListener("click", handleSearchCloseOnClick);
+sort_wrapper.addEventListener("click", handleSortIconOnClick);
+
+function handleInputChange(inputElement) {
+  const inputValue = inputElement.value;
+
+  if (inputValue !== "") {
+    document
+      .querySelector("#search-close-icon")
+      .classList.add("search-close-icon-visible");
+  } else {
+    document
+      .querySelector("#search-close-icon")
+      .classList.remove("search-close-icon-visible");
+  }
+}
+
+function handleSearchCloseOnClick() {
+  document.querySelector("#search-input").value = "";
+  document
+    .querySelector("#search-close-icon")
+    .classList.remove("search-close-icon-visible");
+}
+
+function handleSortIconOnClick() {
+  document
+    .querySelector(".filter-wrapper")
+    .classList.toggle("filter-wrapper-open");
+  document.querySelector("body").classList.toggle("filter-wrapper-overlay");
+}

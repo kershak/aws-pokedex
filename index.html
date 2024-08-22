@@ -1,56 +1,79 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <title>Ramen Raterrrr</title>
-  <link rel="stylesheet" type="text/css" href="styles.css" />
-  <script defer type="module" src="./src/index.js"></script>
-</head>
-
-<body>
-  <header>
-    <h3>PodeDexx</h3>
-  </header>
-
-  
-  <div id="ramen-menu">
-  
-  </div>
-
-
-  <div id="ramen-detail">
-    <!-- <img id = "detail-image" class="detail-image" src="./assets/image-placeholder.jpg" alt="Insert Name Here" />
-    <h2 id= "ramen-name" class="name">Insert Name Here</h2>
-    <h3 id= "restaurant" class="restaurant">Insert Restaurant Here</h3>
-  -->
-  </div>
-
-  <h3>Rating:</h3>
-  <p>
-    <span id='rating-display'>Insert rating here</span> / 10
-  </p>
-  <h3>Comment:</h3>
-  <p id='comment-display'>
-    Insert comment here
-  </p>
-
-
-  <form id="new-ramen">
-    <h4>Add New Pokemon</h4>
-    <label for="new-name">Pokemon Name: </label>
-    <input type="text" name="name" id="new-name" />
-    <label for="new-abilities">New Abilities: </label>
-    <input type="text" name="restaurant" id="new-restaurant" />
-    <label for="new-image">Pokemon Image: </label>
-    <input type="text" name="image" id="new-image" />
-    <label for="new-rating">Rating: </label>
-    <input type="number" name="rating" id="new-rating" />
-    <label for="new-comment">Comment: </label>
-    <textarea name="new-comment" name="new-comment" id="new-comment"></textarea>
-    <input type="submit" id='submit-button' value="Create New Pokemon" />
-  </form>
-
-</body>
-
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./index.js" defer></script>
+    <script src="" defer></script>
+  </head>
+  <body>
+    <main class="main">
+      <header class="header home">
+        <div class="container">
+          <div class="logo-wrapper">
+            <img src="./img/pokeball.svg" />
+            <h1>Pokedex</h1>
+          </div>
+          <div class="search-wrapper">
+            <div class="search-wrap">
+              <img
+                src="./img/search.svg"
+                alt="search icon"
+                class="search-icon"
+              />
+              <input
+                type="text"
+                class="search-input body3-fonts"
+                placeholder="Search"
+                id="search-input"
+              />
+              <img
+                src="./img/cross.svg"
+                alt="cross icon"
+                class="search-close-icon"
+                id="search-close-icon"
+              />
+            </div>
+            <div class="sort-wrapper">
+              <div class="sort-wrap">
+                <img
+                  src="./img/sorting.svg"
+                  alt="sorting"
+                  class="sort-icon"
+                  id="sort-icon"
+                />
+              </div>
+              <div class="filter-wrapper">
+                <p class="body2-fonts">Sort by:</p>
+                <div class="filter-wrap">
+                  <div>
+                    <input
+                      type="radio"
+                      id="number"
+                      name="filters"
+                      value="number"
+                      checked
+                    />
+                    <label for="number" class="body3-fonts">Number</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="name" name="filters" value="name" />
+                    <label for="name" class="body3-fonts">Name</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="pokemon-list">
+        <div class="container">
+          <div class="list-wrapper"></div>
+        </div>
+        <div id="not-found-message">Pokemon not found</div>
+      </section>
+    </main>
+  </body>
 </html>
