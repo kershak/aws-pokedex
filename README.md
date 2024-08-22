@@ -35,5 +35,13 @@ Posible wireframes:
 
 
 ## References
+<<<<<<< HEAD
 
 https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
+=======
+
+https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
+
+
+
+>>>>>>> dd34ef34f1b6d646beee265040761b102eb70968
