@@ -1,4 +1,5 @@
-/*  let currentPokemonId = null;
+/*
+let currentPokemonId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const MAX_POKEMONS = 151;
@@ -251,3 +252,4 @@ function getEnglishFlavorText(pokemonSpecies) {
   }
   return "";
 }
+*/

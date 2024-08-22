@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="./index.js" defer></script>
-    <script src="" defer></script>
+    <script defer src="./index.js" ></script>
+    <script src="pokemon-detail.js" defer></script>
   </head>
   <body>
     <main class="main">
@@ -37,7 +37,7 @@
               />
             </div>
             <div class="sort-wrapper">
-              <div class="sort-wrap">
+              <div class="sort-wrap">   
                 <img
                   src="./img/sorting.svg"
                   alt="sorting"
@@ -66,11 +66,43 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>  
       </header>
+      
+      <div id="pokemon-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2 id="modal-title"></h2>
+          <p id="modal-description"></p>    
+          <img class = "modal-img" id="modal-img" src="" alt="Pokemon Image">
+        </div>
+      </div>  
+      <section class="new-pokemon-form">
+        <h2>Add a New Pokemon</h2>
+        <form id="new-pokemon-form">
+          <label for="name">Name:</label>
+          <input type="text" id="newname" name="name" required><br><br>
+          <label for="height">Height (in meters):</label>
+          <input type="number" id="newheight" name="height" required><br><br>
+          <label for="weight">Weight (in kilograms):</label>
+          <input type="number" id="newweight" name="weight" required><br><br>
+          <button type="submit">Add Pokemon</button>
+        </form>
+      </section>
+
       <section class="pokemon-list">
         <div class="container">
-          <div class="list-wrapper"></div>
+          <div class="list-container">  
+            <div class="number-wrap">
+              <p class="caption-fonts">#${pokemonID}</p>
+          </div>
+          <div class="img-wrap">
+              <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" alt="${pokemon.name}" />
+          </div>
+          <div class="name-wrap">
+              <p class="body3-fonts">#${pokemon.name}</p>
+          </div>
+          </div>
         </div>
         <div id="not-found-message">Pokemon not found</div>
       </section>

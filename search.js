@@ -35,3 +35,4 @@ function handleSortIconOnClick() {
     .classList.toggle("filter-wrapper-open");
   document.querySelector("body").classList.toggle("filter-wrapper-overlay");
 }
+  */
