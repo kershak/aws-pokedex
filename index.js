@@ -184,7 +184,7 @@ function createNewPokemon(event) {
     weight: weight
   };
 
-  // Send new Pokemon data to your API or backend (replace with your actual API call)
+  // Send new Pokemon data to your API
   fetch('http://localhost:3000/newpokemon', {
     method: 'POST',
     headers: {
@@ -196,7 +196,6 @@ function createNewPokemon(event) {
   .then(updatePokemonList) 
   .catch(error => {
     console.error('Error adding Pokemon:', error);
-    alert('Error Please try again.');
   });
 
   document.getElementById("new-pokemon-form").reset();

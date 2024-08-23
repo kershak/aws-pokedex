@@ -1,16 +1,40 @@
 {
-    "pokemon": [
-        {
-             "id": "1",
-            "name": "pokachu",
-             "height": "24",
-             "weight": "24"
-        },
-        {
-            "id": "2",
-            "name": "borachu",
-            "height":  "12",
-            "weight": "2"
-        }
-    ]
-}   
+  "newpokemon": [
+    {
+      "id": "1",
+      "name": "pokachu",
+      "height": "24",
+      "weight": "24"
+    },
+    {
+      "id": "2",
+      "name": "borachu",
+      "height": "12",
+      "weight": "2"
+    },
+    {
+      "id": "5d8a",
+      "name": "juanit",
+      "height": 234234,
+      "weight": 234234
+    },
+    {
+      "id": "f9a6",
+      "name": "asdfasd",
+      "height": 12,
+      "weight": 12
+    },
+    {
+      "id": "cb07",
+      "name": "asdf",
+      "height": 12,
+      "weight": 123
+    },
+    {
+      "id": "cfea",
+      "name": "pokachu",
+      "height": 213,
+      "weight": 223
+    }
+  ]
+}

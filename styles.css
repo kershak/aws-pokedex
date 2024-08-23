@@ -10,6 +10,9 @@ h4,
 h1 {
   font-size: 75px;
   line-height: 24px;
+  text-align: center;
+  align-items: center;
+  position: relative;
 }
 
 h2 {
@@ -87,11 +90,14 @@ body {
 
 .logo-wrapper > h1 {
   color: rgb(92,54,19);
+  align-items: center;
+  margin-right: auto;
 }
 
 .logo-wrapper > img {
   margin-right: 250px;
   align-items: center;
+  margin-right: auto;
 }
 
 .search-wrapper,
